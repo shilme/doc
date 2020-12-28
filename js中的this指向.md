@@ -1,5 +1,6 @@
 ### this指向
 #### 例子1
+this指向调用它的对象上，如果没有对象调用，指向Window
 ```
 function a(){
     var user = "我是用户";

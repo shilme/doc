@@ -1,92 +1,35 @@
-function a(){
-  var user = "追梦子"
-  console.log(this.user)
-  console.log(this)
-}
-a()
 
-var o = {
-  user:"追梦子",
-  fn:function(){
-      console.log(this.user);
-  }
-}
-o.fn();
+// function test(){
+//   let x = 1;
+//   console.log(this.x); //2
+//   // return ()=>{
+//   //   console.log(this.x); //2 箭头函数将this指向当前环境上下文,即this指向test中的this,即obj
+//   // }
+//   return function(){
+//     console.log(this.x)
+//   }
+// },
 
-function b(){
-  var user = "追梦子"
-  function a(){
-    user ="1"
-    console.log(this.user)//undefined
-  }
-  // a()
-}
-var a1 = new b()
-console.log(a1)
-a1.a()
-
-
-var o = {
-  a:10,
-  b:{
-      // a:12,
-      fn:function(){
-          console.log(this.a); //undefined
-      }
-  }
-}
-o.b.fn();
-
-
-"use strict"
-function test() {
-  var name = 'test';
-  var person = {
-      name: 'hello',
-      say: function () {
-          var name = 'world';
-          console.log(this.name);//world
-      }
-  };
-  person.say();
-}
-test()
-
-
-let arr = [3,2,4,1,5]
-function between(a,b)
-{
-  return function(v){
-    return v>=a && v<=b
-  }
-}
-console.log(arr.filter(between(3,5)))
-
-
-var name="小张",
-age="17";
-var obj={
-  name:"小刘",
-  objAge:this.age,
-  myFun:function(){
-    console.log(this.name+"年龄"+this.age);
-  }
-}
-console.log(obj.objAge);
-obj.myFun();
-
-// "use strict"
-let hd = {
-  user: "abcdef",
-  get: function() {
-    return () => this.user;
-  },
-  a:function(){
+let obj = {
+  x:2,
+  fn:function test(){
+    let x = 1;
+    console.log(this.x); //2
+    // return ()=>{
+    //   console.log(this.x); //2 箭头函数将this指向当前环境上下文,即this指向test中的this,即obj
+    // }
     return function(){
-      this.user
+      console.log(this.x)
     }
+  },
+  // fn1:()=>{
+  //   console.log(this.x); //undefined 箭头函数将this指向当前环境上下文,即this指向全局环境中的this,即window
+  // }
+  fn1: function(){
+    console.log(this.x)
   }
 };
-
-console.log(hd.a())
-
+obj.fn()();
+// var fn = obj.fn();
+// fn();
+obj.fn1();
