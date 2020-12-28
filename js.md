@@ -1,5 +1,5 @@
 
-### 数组
+# 数组
 ```
 new Array() 与 Array.of() 区别
 Array.isArray() 检查数组是否存在
@@ -50,12 +50,12 @@ filter() 过滤
 map()映射可以在数组的所有元素上应用函数，用于映射出新的值
 reduce() 与 reduceRight() 函数可以迭代数组的所有元素，reduce 从前开始 reduceRight 从后面开始。下面通过函数计算课程点击数的和。
 ```
-### Symbol
+# Symbol
 ```
 永远不会重复的字符串
 ```
 
-### set
+# set
 ```
 用于存储任何类型的唯一值，无论是基本类型还是对象引用。
 
@@ -81,7 +81,7 @@ set.clear() 清除所有元素
 对象只有在其它某个（些）地方能被访问的时候，才能留在 set 中。
 跟 Set 一样，WeakSet 支持 add，has 和 delete 方法，但不支持 size 和 keys()，并且不可迭代。
 ```
-### map
+# map
 ```
 Map是一组键值对的结构，用于解决以往不能用对象做为键的问题
 
@@ -119,7 +119,7 @@ WeakMap
   WeakSet 支持 add，has 和 delete 方法
 ```
 
-### 函数
+# 函数
 ```
 //arguments 是函数获得到所有参数集合
 function sum() {
@@ -137,9 +137,7 @@ function sum(...args) {
 console.log(sum(2, 3, 4, 2, 6)); //17
 ```
 
-
-
-### 对象
+# 对象
 ```
 对象是属性和方法的集合即封装
 将复杂功能隐藏在内部，只开放给外部少量方法，更改对象内部的复杂逻辑不会对外部调用造成影响即抽象
@@ -275,3 +273,12 @@ const lessons = [
 const stringDotProxy = new Proxy(lessons, stringDot);
 console.log(stringDotProxy[0]);
 ```
+# 事件循环
+
+#### 1.整体的script(作为第一个宏任务)开始执行的时候，会把所有代码分为两部分：“同步任务”、“异步任务”；
+#### 2.同步任务会直接进入主线程依次执行；
+#### 3.异步任务会再分为宏任务和微任务；
+#### 4.宏任务进入到Event Table中，并在里面注册回调函数，每当指定的事件完成时，Event Table会将这个函数移到Event Queue中；
+#### 5.微任务也会进入到另一个Event Table中，并在里面注册回调函数，每当指定的事件完成时，Event Table会将这个函数移到Event Queue中；
+#### 6.当线程内的任务执行完毕，主线程为空时，会检查微任务的Event Queue，如果有任务，就全部执行，如果没有就执行下一个宏任务；
+#### 7.上述过程会不断重复，这就是Event Loop事件循环；
