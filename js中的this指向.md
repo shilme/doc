@@ -1,6 +1,71 @@
 ### this指向
+#### this指向调用它的对象上，如果没有对象调用，指向Window
+### 箭头函数
+```
+var x = 11;
+var obb = {
+  x: 222,
+  y: {
+    x:333,
+    obc: function f() {
+      console.log(this)
+      var x = 111;
+      var obj = {
+        x: 22,
+        say: () => {
+          console.log(this.x);//333
+        }
+      }
+      obj.say()
+    }
+  }
+}
+obb.y.obc()
+//箭头函数的this是继承父执行上下文里面的this，这里箭头函数的执行上下文是函数f()所以它就继承了f()的this
+```
+```
+var x = 11;
+var obb = {
+  x: 222,
+  y: {
+    x: 333,
+    obc: f = () =>{
+      console.log(this)
+      var x = 111;
+      var obj = {
+        x: 22,
+        say: () => {
+          console.log(this.x);//11
+        }
+      }
+       obj.say();
+    }
+  }
+}
+obb.y.obc()
+```
+```
+var x = 11;
+var obb = {
+  x: 222,
+  y: {
+    x:333,
+    obc: function() {
+      var x = 111;
+      var obj = {
+        x: 22,
+        say: function() {
+          console.log(this.x);//22
+        }
+      }
+      obj.say()
+    }
+  }
+}
+obb.y.obc()
+```
+### 函数
 #### 例子1
-this指向调用它的对象上，如果没有对象调用，指向Window
 ```
 function a(){
     var user = "我是用户";
@@ -82,7 +147,7 @@ var fn=obj.fn();
 fn();
 obj.fn1();
 ```
-
+#### 例子8
 ```
 var fun = function(){
   this.name = 'peter';
