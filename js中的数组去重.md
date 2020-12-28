@@ -43,5 +43,5 @@ function unique(arr){
   }
   return arr1;
 }
-onsole.log(unique(arr));    // 1, -5, -4, 0, 7, 3
+console.log(unique(arr));    // 1, -5, -4, 0, 7, 3
 ```

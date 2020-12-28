@@ -136,128 +136,9 @@ function sum(...args) {
 }
 console.log(sum(2, 3, 4, 2, 6)); //17
 ```
-```
-bind apply call 区别
-构造函数中的this默认是一个空对象，然后构造函数处理后把这个空对象变得有值
 
 
-function User(name) {
-  this.name = name;
-}
 
-let aa = {};
-User.call(aa, "123456");
-console.log(aa.name); //123456
-
-apply 用数组传参
-call 需要分别传参
-与 bind 不同 call/apply 会立即执行函数
-bind 复制了一份
-bind 先传参的 不会被后传参的覆盖掉
-```
-### 闭包
-```
-闭包指子函数可以访问外部作用域变量的函数特性，即使在子函数作用域外也可以访问。如果没有闭包那么在处理事件绑定，异步请求时都会变得困难。
-```
-```
-
-function hd() {
-  let name = 'abcdef';
-  return function () {
-  	return name;
-  }
-}
-let hdcms = hd();
-console.log(hdcms()); //abcdef
-
-```
-```
-//使用闭包返回数组区间元素
-let arr = [3, 2, 4, 1, 5, 6];
-function between(a, b) {
-  return function(v) {
-    return v >= a && v <= b;
-  };
-}
-console.log(arr.filter(between(3, 5)));
-```
-
-```
-let lessons = [
-  {
-    title: "媒体查询响应式布局",
-    click: 89,
-    price: 12
-  },
-  {
-    title: "FLEX 弹性盒模型",
-    click: 45,
-    price: 120
-  },
-  {
-    title: "GRID 栅格系统",
-    click: 19,
-    price: 67
-  },
-  {
-    title: "盒子模型详解",
-    click: 29,
-    price: 300
-  }
-];
-function order(field) {
-  return (a, b) => (a[field] > b[field] ? 1 : -1);
-}
-console.table(lessons.sort(order("price")));
-```
-```
-//内存泄露
-<body>
-  <div desc="houdunren">我是1</div>
-  <div desc="hdcms">我是2</div>
-</body>
-<script>
-  let divs = document.querySelectorAll("div");
-  divs.forEach(function(item) {
-    item.addEventListener("click", function() {
-      console.log(item.getAttribute("desc"));
-    });
-  });
-</script>
-```
-```
-//修正内存泄露
-let divs = document.querySelectorAll("div");
-divs.forEach(function(item) {
-  let desc = item.getAttribute("desc");
-  item.addEventListener("click", function() {
-    console.log(desc);
-  });
-  item = null;
-});
-```
-```
-//this指向window
-let hd = {
-  user: "abcdef",
-  get: function() {
-    return function() {
-      return this.user;
-    };
-  }
-};
-console.log(hd.get()()); //undefined
-```
-```
-//用箭头函数修正 this指向window
-let hd = {
-  user: "abcdef",
-  get: function() {
-    return () => this.user;
-  }
-};
-console.log(hd.get()()); //undefined
-```
 ### 对象
 ```
 对象是属性和方法的集合即封装
@@ -307,8 +188,6 @@ Object.isFrozen()方法判断一个对象是否被冻结
 getter/setter
 使用 defineProperty 可以模拟定义私有属性
 代理（拦截器）是对象的访问控制，setter/getter 是对单个对象属性的控制，而代理是对整个对象的控制1、读写属性时代码更简洁2、对象的多个属性控制统一交给代理完成3、严格模式下 set 必须返回布尔值
-
-
 ```
 ```
 使用 defineProperty 可以模拟定义私有属性
@@ -566,7 +445,7 @@ extend(Member, Access); //Member继承Access
 Access.prototype.rules = function() {};
 User.prototype.getName = function() {};
 
-console.log(new Admin()); // 继承关系: Admin>User>Access>Object
+console.log(new Admin()); // 继承关系: Admin>User>a>Object
 console.log(new Member()); //继承关系：Member>Access>Object
 ```
 ```
