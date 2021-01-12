@@ -40,11 +40,11 @@ var lengthOfLongestSubstring = function(s) {
       }
     }
     console.log(str)
-    return res; 
+    return res;
 };
 console.log(lengthOfLongestSubstring("adgadgz"))
 
-//3. 
+//3.
 // 请实现 multiply 方法
 a.multiply();
 
@@ -58,3 +58,41 @@ for(let b = 0; b<a.length; b++){
 }
 console.log(array)
 console.log(a); // 输出 [1, 2, 3, 4, 5, 1, 4, 9, 16, 25]
+
+
+var arr = [
+  {
+    name: "mingzi",
+    mag:'xiaoxi'
+  },{
+    name: "mingzi",
+    mag:'xiaoxi'
+  },{
+    name: "mingzi1",
+    mag:'xiaoxi1'
+  },
+]
+var copyArr = []
+for(let model of arr)
+{
+  var index = copyArr.findIndex(el=> el.name === model.name)
+  console.log(index)
+  if(index < 0)
+  {
+    copyArr.push(model)
+  }
+}
+console.log(copyArr)
+
+
+// 判断对象里有没有值
+
+var a = {
+  name:undefined,
+  value:undefined
+}
+
+var aa  = Object.values(a).length > 0
+console.log(aa)
+
+//不好使
