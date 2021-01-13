@@ -25,24 +25,30 @@ function test(){
 test();
 
 //2、获取给定字符串中最长无重复字符的子字符串，例如：'adgadgz' => 'adgz'
-var lengthOfLongestSubstring = function(s) {
-    var res = 0; // 用于存放当前最长无重复子串的长度
-    var str = ""; // 用于存放无重复子串
-    var len = s.length;
-    for(var i = 0; i < len; i++) {
-      var char = s.charAt(i);
-      var index = str.indexOf(char);
-      if(index === -1) {
-        str += char;
-        res = res < str.length ? str.length : res;
-      } else {
-        str = str.substr(index + 1) + char;
-      }
+var a = "abcdabcdefa"
+console.log(a)
+function test1(str)
+{
+  var s  = ""
+  for(var i=0; i<str.length;i++)
+  {
+    var char = str.charAt(i) //这个获取字符串，每个字的值
+    var index = s.indexOf(char)//查找s中有没有这个值，有返回其下表，没有返回-1
+    if(index ==-1)//如果没找到为-1
+    {
+      s += char //没找到把值加到s
     }
-    console.log(str)
-    return res;
-};
-console.log(lengthOfLongestSubstring("adgadgz"))
+    else//找到了为下标
+    {
+      var temp = s.substr(index + 1) //截取字符串
+      s = temp + char //
+    }
+    console.log("第",i,"次",s)
+  }
+  return s
+}
+
+console.log(test1(a))
 
 //3.
 // 请实现 multiply 方法
@@ -96,3 +102,73 @@ var aa  = Object.values(a).length > 0
 console.log(aa)
 
 //不好使
+
+
+function test(arr,temparr){
+
+  for(let index in arr)
+  {
+    if(Array.isArray(arr[index]))
+    {
+      console.log("if",arr[index])
+      test(arr[index],temparr)
+    }
+    else
+    {
+      console.log("else",arr[index])
+      temparr.push(arr[index])
+    }
+  }
+  return temparr
+}
+
+var arr = ['1','2','3',['4','5',['6','7']]]
+console.log( test(arr,[]))
+
+
+
+for(var i=0; i<5; i++)
+{
+  setTimeout(function(){
+    console.log(i)
+  },100)
+}
+// 5
+// 5
+// 5
+// 5
+// 5
+
+for(let i=0; i<5; i++)
+{
+  setTimeout(function(){
+    console.log(i)
+  },100)
+}
+// 0
+// 1
+// 2
+// 3
+// 4
+for(let i=0; i<5; i++)
+{
+  console.log(i)
+}
+console.log(i)
+//0
+// 1
+// 2
+// 3
+// 4
+// error
+for(var i=0; i<5; i++)
+{
+  console.log(i)
+}
+console.log(i)
+//0
+// 1
+// 2
+// 3
+// 4
+// 5
