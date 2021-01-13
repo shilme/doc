@@ -282,3 +282,66 @@ console.log(stringDotProxy[0]);
 #### 5.微任务也会进入到另一个Event Table中，并在里面注册回调函数，每当指定的事件完成时，Event Table会将这个函数移到Event Queue中；
 #### 6.当线程内的任务执行完毕，主线程为空时，会检查微任务的Event Queue，如果有任务，就全部执行，如果没有就执行下一个宏任务；
 #### 7.上述过程会不断重复，这就是Event Loop事件循环；
+
+
+### 箭头函数与非箭头函数区别
+```
+箭头函数是匿名函数，不能作为构造函数，不能使用new
+箭头函数不绑定arguments，取而代之用rest参数...解决
+箭头函数不绑定this，会捕获其所在的上下文的this值，作为自己的this值
+箭头函数通过call()或apply() 方法调用一个函数时，只传入了一个参数，对 this 并没有影响
+箭头函数没有原型属性
+箭头函数不能当做Generator函数,不能使用yield关键字
+```
+### require与import 区别
+```
+区别1：模块加载的时间
+require：运行时加载
+import：编译时加载（效率更高）【由于是编译时加载，所以import命令会提升到整个模块的头部】
+```
+```
+test();
+import { test} from '/test';
+```
+```
+区别2：模块的本质
+require：模块就是对象，输入时必须查找对象属性
+import：ES6 模块不是对象，而是通过 export 命令显式指定输出的代码，再通过 import 命令输入（这也导致了没法引用 ES6 模块本身，因为它不是对象）。由于 ES6 模块是编译时加载，使得静态分析成为可能。有了它，就能进一步拓宽 JavaScript 的语法，比如引入宏（macro）和类型检验（type system）这些只能靠静态分析实现的功能。
+```
+```
+// CommonJS模块
+let { exists, readFile } = require('fs');
+// 等同于
+let fs = require('fs');
+let exists = fs.exists;
+let readfile = fs.readfile;
+```
+```
+上面CommonJs模块中，实质上整体加载了fs对象（fs模块），然后再从fs对象上读取方法
+```
+```
+// ES6模块
+import { exists, readFile } from 'fs';
+```
+```
+上面ES6模块，实质上从fs模块加载2个对应的方法，其他方法不加载
+```
+```
+区别3：严格模式
+CommonJs模块和ES6模块的区别：
+CommonJs模块默认采用非严格模式
+ES6 的模块自动采用严格模式，不管你有没有在模块头部加上 “use strict”;
+CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用，举例如下
+require/exports 输出的是值的拷贝。也就是说，一旦输出一个值，模块内部的变化就影响不到这个值。
+import/export 模块输出的是值的引用。JS 引擎对脚本静态分析的时候，遇到模块加载命令import，就会生成一个只读引用。等到脚本真正执行时，再根据这个只读引用，到被加载的那个模块里面去取值。
+若文件引用的模块值改变，require 引入的模块值不会改变，而 import 引入的模块值会改变。
+```
+```
+// m1.js
+export var foo = 'bar';
+setTimeout(() => foo = 'baz', 500);
+// m2.js
+import {foo} from './m1.js';
+console.log(foo); //bar
+setTimeout(() => console.log(foo), 500); //baz
+```
