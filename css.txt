@@ -1,0 +1,94 @@
+max-height: 500px;
+overflow: auto;
+opacity:0.3;
+border:1px solid rgba(18,161,219,1);
+给table每一个加线
+.table,table tr th, table tr td { border:1px solid rgba(187,214,237,1); }
+
+cursor:not-allowed;
+
+overflow:auto;
+
+隐藏滚动条::-webkit-scrollbar {display:none}
+::-webkit-scrollbar 滚动条整体部分，可以设置宽度啥的
+::-webkit-scrollbar-button 滚动条两端的按钮
+::-webkit-scrollbar-track  外层轨道
+::-webkit-scrollbar-track-piece  内层滚动槽
+::-webkit-scrollbar-thumb 滚动的滑块
+::-webkit-scrollbar-corner 边角
+::-webkit-resizer 定义右下角拖动块的样式
+
+
+修改input占位符
+input::-webkit-input-placeholder{
+  color:red !important;
+}　
+过渡
+transition: all 0.6s;
+放大
+transform: scale(1.4);
+垂直居中
+justify-content: center;
+调整主轴方向（默认为水平方向）包括row、column、row-reverse、column-reverse
+flex-direction:column;
+默认值：border-box 规定背景的绘制区域
+background-clip: content-box;
+justify-content: space-evenly;
+溢出滚动
+overflow: scroll;
+溢出内存不可见
+overflow: hidden;
+阴影
+box-shadow: 0 0 5px rgba(100, 100, 100, 0.8);
+粘性定位
+position: sticky;
+固定定位
+position: fixed;
+
+div:nth-of-type(1) {
+  background: green;
+}
+div:first-of-type {
+  background: green;
+}
+div:last-of-type {
+  background: green;
+}
+table tbody tr:nth-child(odd) {
+  background: #1bb385;
+  color: white;
+}
+shape-outside: margin-box;
+shape-outside: border-box;
+clip-path: circle(50% at center);
+clip-path: ellipse(50% 80% at 100% 0);
+clip-path: polygon(50% 0, 100% 100%, 0 100%)
+shape-outside: inset(50px 30px 80px 50px) padding-box;
+shape-outside: circle(50%) padding-box;
+
+display: table;
+display: table-caption;
+display: table-header-group;
+display: table-row-group;
+display: table-footer-group;
+display: table-row;
+display: table-cell;
+caption-side: top;
+边框间隔
+border-spacing: 50px 10px;
+边框合并
+border-collapse: collapse;
+隐藏单元格
+empty-cells: hide;
+background-repeat: no-repeat;
+list-style-position: inside;
+list-style: none;
+text-indent: 15px;
+可以一次定义列表样式
+ul {
+  list-style: circle inside;
+}
+隐藏列表符号
+ul {
+  list-style-type: none;
+}

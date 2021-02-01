@@ -1,0 +1,65 @@
+systemctl status firewalld.service 
+
+systemctl disable firewalld.service 
+
+systemctl stop firewalld.service 
+
+
+找文件  #find ./ -name '*netcore*'
+
+移动文件 # mv aspnetcore-runtime-3.1.7-linux-x64.tar.gz /home
+
+
+ar -vxf  /00-install/01-sdk/dotnet-sdk-2.2.401-linux-x64.tar.gz  -C /home/dotcore^C
+
+tar -vxf aspnetcore-runtime-3.1.7-linux-x64.tar.gz -C /home/dotcore
+
+
+创建文件 mkdir /home/dotcore  
+
+tar -vxf aspnetcore-runtime-3.1.7-linux-x64.tar.gz -C /home/dotcore
+
+ln -sf /home/dotcore/dotnet /usr/bin/dotnet
+
+dotnet --info
+
+dotnet Webapi.dll --urls http://*:5005
+
+# nohup dotnet Webapi.dll --urls http://*:5005 > /home/file.out 2>& 1&
+
+# nohup dotnet Webapi.dll --urls http://*:5005 > /dev/null 2>& 1&
+nohup dotnet Webapi.dll  > /dev/null 2>& 1&
+
+ tail -100f /home/file.out 
+
+1.查找被占用的端口
+netstat -tln
+netstat -tln | grep 8080
+netstat -tln 查看端口使用情况，而netstat -tln | grep 8080则是只查看端口8080的使用情况
+
+2.查看端口属于哪个程序？端口被哪个进程占用
+lsof -i:8060
+COMMAND   PID   USER   FD   TYPE   DEVICE SIZE/OFF NODE NAME
+Java    20804   root   36u  IPv6 35452317      0t0  TCP *:pcsync-https (LISTEN)
+
+3.杀掉占用端口的进程  根据pid杀掉
+kill -9 进程id  
+kill -9 20804
+
+ps -ef | grep openvassd
+
+
+https://blog.csdn.net/yybk426/article/details/94649834
+
+country name：国家名
+state or province name：州或者省名
+locality name：城市名称
+Organization Name ：组织名
+Organizational Unit Name  ：组织单位名
+Common Name：公用名
+Email Address：电子邮件地址
+
+.net core 部署
+mkdir -p /home/dotcore
+tar -vxf  /00-install/01-sdk/dotnet-sdk-2.2.401-linux-x64.tar.gz  -C /home/dotcore
+ln -sf /home/dotcore/dotnet /usr/bin/dotnet
