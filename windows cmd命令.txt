@@ -1,0 +1,2 @@
+查看端口 netstat -aon|findstr "8080"
+杀死端口 taskkill /pid 4136-t -f
