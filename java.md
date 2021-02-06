@@ -157,9 +157,94 @@ volatile
 
 ```
 特点：线程可见性，禁止重拍指令
+禁止重拍指令：cpu的乱序执行，cpu在进行读等待的同时等待指令，是cpu乱序的根源不是乱，而是提高效率。
+```
+内存屏障
+```
+loadload屏障：读读屏障
+storeload屏障：写读屏障
+loadstore屏障：读写屏障
+storestore屏障：写写屏障
+```
+```
+as if serial
+不管如何重排序，单线程执行结果不会改变
+```
+### GC
+```
+mark-Sweep（标记清除）
+copying(拷贝)
+mark-compact(标记压缩)
+```
+```
+parNew
+CMS
+Serial
+Serial Old
+parallel Scavenge
+Parallel Old
+G1
+ZGC
+Shenandoah
+Epsilon
 ```
 
+实现特性
+
+```java
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Reflect {
 
+    String name() default "sunguoli";
+
+}
+```
+```java
+import com.github.hackersun.annotation.Reflect;
+import java.lang.reflect.Method;
+
+public class ReflectProcessor {
+
+    public void parseMethod(final Class<?> clazz) throws Exception {
+        final Object obj = clazz.getConstructor(new Class[] {}).newInstance(new Object[] {});
+        final Method[] methods = clazz.getDeclaredMethods();
+        for (final Method method : methods) {
+            final Reflect my = method.getAnnotation(Reflect.class);
+            if (null != my) {
+                method.invoke(obj, my.name());
+            }
+        }
+    }
+}
+```
+```java
+import com.github.hackersun.annotation.Reflect;
+import com.github.hackersun.processor.reflect.ReflectProcessor;
+
+
+public class ReflectTest {
+
+    @Reflect
+    public static void sayHello(final String name) {
+        System.out.println("==>> Hi, " + name + " [sayHello]");
+    }
+
+    @Reflect(name = "AngelaBaby")
+    public static void sayHelloToSomeone(final String name) {
+        System.out.println("==>> Hi, " + name + " [sayHelloToSomeone]");
+    }
+
+    public static void main(final String[] args) throws Exception {
+        final ReflectProcessor relectProcessor = new ReflectProcessor();
+        relectProcessor.parseMethod(ReflectTest.class);
+    }
+}
+```
 
